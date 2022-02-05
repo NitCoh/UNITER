@@ -285,7 +285,7 @@ class UniterEncoder(nn.Module):
         all_attentions = []
         hidden_states = input_
         for layer_module in self.layer:
-            hidden_states, attention_probs = layer_module(hidden_states, attention_mask, output_attentions=False)
+            hidden_states, attention_probs = layer_module(hidden_states, attention_mask, output_attentions=output_attentions)
             if output_attentions:
                 all_attentions.append(attention_probs)
             if output_all_encoded_layers:
