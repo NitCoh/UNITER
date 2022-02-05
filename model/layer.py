@@ -92,6 +92,8 @@ class BertSelfAttention(nn.Module):
 
         attentions = attention_probs if output_attentions else None  # before applying dropout
 
+        print(f"Change here1: {attentions.shape}")
+
         # This is actually dropping out entire tokens to attend to, which might
         # seem a bit unusual, but is taken from the original Transformer paper.
         attention_probs = self.dropout(attention_probs)
@@ -100,6 +102,8 @@ class BertSelfAttention(nn.Module):
         context_layer = context_layer.permute(0, 2, 1, 3).contiguous()
         new_context_layer_shape = context_layer.size()[:-2] + (self.all_head_size,)
         context_layer = context_layer.view(*new_context_layer_shape)
+
+        print(f"Change here2: {attentions.shape}")
 
         return context_layer, attentions
 
