@@ -365,7 +365,8 @@ class UniterModel(UniterPreTrainedModel):
 
         encoded_layers, all_attentions = self.encoder(
             embedding_output, extended_attention_mask,
-            output_all_encoded_layers=output_all_encoded_layers)
+            output_all_encoded_layers=output_all_encoded_layers,
+            output_attentions=output_attentions)
         if not output_all_encoded_layers:
             encoded_layers = encoded_layers[-1]
         return encoded_layers, all_attentions
