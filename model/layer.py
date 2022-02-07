@@ -90,9 +90,6 @@ class BertSelfAttention(nn.Module):
         # Normalize the attention scores to probabilities.
         attention_probs = nn.Softmax(dim=-1)(attention_scores)
 
-        attentions = attention_probs if output_attentions else None  # before applying dropout
-
-        print(f"Change here1: {attentions.shape}")
 
         # This is actually dropping out entire tokens to attend to, which might
         # seem a bit unusual, but is taken from the original Transformer paper.
@@ -103,7 +100,7 @@ class BertSelfAttention(nn.Module):
         new_context_layer_shape = context_layer.size()[:-2] + (self.all_head_size,)
         context_layer = context_layer.view(*new_context_layer_shape)
 
-        print(f"Change here2: {attentions.shape}")
+        attentions = attention_probs if output_attentions else None  # refer to "BertLayer" in BertModel HuggingFace.
 
         return context_layer, attentions
 
